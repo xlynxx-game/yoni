@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relieve and Release — Therapeutic Massage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,450;9..144,600;9..144,700&family=Work+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1F2E28;
+    --ink-soft:#2C3E35;
+    --parchment:#F4EFE4;
+    --parchment-dim:#EAE2D2;
+    --clay:#BD7E68;
+    --clay-deep:#A2664F;
+    --sage:#8AA090;
+    --gold:#C9A667;
+    --line:rgba(244,239,228,0.16);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--ink);
+    color:var(--parchment);
+    font-family:'Work Sans', sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  ::selection{background:var(--clay); color:var(--ink);}
+
+  a{color:inherit; text-decoration:none;}
+
+  .eyebrow{
+    font-family:'Space Mono', monospace;
+    font-size:0.7rem;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--sage);
+  }
+
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    color:var(--parchment);
+  }
+
+  .container{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:100;
+    background:rgba(31,46,40,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.container{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding-top:20px;
+    padding-bottom:20px;
+  }
+  .logo{
+    font-family:'Fraunces', serif;
+    font-size:1.15rem;
+    font-weight:600;
+    letter-spacing:0.01em;
+  }
+  .logo span{color:var(--clay);}
+  .nav-links{
+    display:flex;
+    gap:36px;
+    font-size:0.88rem;
+    letter-spacing:0.02em;
+  }
+  .nav-links a{
+    position:relative;
+    padding:4px 0;
+    color:var(--parchment-dim);
+    transition:color 0.25s ease;
+  }
+  .nav-links a:hover{color:var(--parchment);}
+  .nav-links a::after{
+    content:'';
+    position:absolute; left:0; bottom:0;
+    width:0; height:1px;
+    background:var(--clay);
+    transition:width 0.3s ease;
+  }
+  .nav-links a:hover::after{width:100%;}
+  .nav-cta{
+    font-size:0.82rem;
+    font-family:'Space Mono', monospace;
+    letter-spacing:0.05em;
+    border:1px solid var(--gold);
+    padding:9px 20px;
+    border-radius:2px;
+    color:var(--gold);
+    transition:all 0.25s ease;
+  }
+  .nav-cta:hover{background:var(--gold); color:var(--ink);}
+  .menu-btn{display:none;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    position:relative;
+    padding-top:100px;
+    background:
+      radial-gradient(ellipse at 15% 20%, rgba(138,160,144,0.10), transparent 55%),
+      radial-gradient(ellipse at 85% 80%, rgba(189,126,104,0.12), transparent 55%),
+      var(--ink);
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.15fr 0.85fr;
+    gap:40px;
+    align-items:center;
+    width:100%;
+  }
+  .hero-headline{
+    font-size:clamp(3.2rem, 7vw, 5.6rem);
+    line-height:0.98;
+  }
+  .hero-headline .relieve{
+    display:block;
+    letter-spacing:-0.01em;
+    font-weight:700;
+  }
+  .hero-headline .release{
+    display:block;
+    font-style:italic;
+    font-weight:300;
+    letter-spacing:0.05em;
+    color:var(--clay);
+  }
+  .hero-sub{
+    max-width:420px;
+    margin-top:28px;
+    color:var(--parchment-dim);
+    font-size:1.05rem;
+  }
+  .hero-actions{
+    margin-top:38px;
+    display:flex;
+    align-items:center;
+    gap:28px;
+  }
+  .btn-primary{
+    background:var(--clay);
+    color:var(--ink);
+    font-family:'Space Mono', monospace;
+    font-size:0.82rem;
+    letter-spacing:0.05em;
+    padding:15px 30px;
+    border-radius:2px;
+    transition:transform 0.25s ease, background 0.25s ease;
+    display:inline-block;
+  }
+  .btn-primary:hover{background:var(--clay-deep); transform:translateY(-2px);}
+  .hero-note{
+    font-size:0.82rem;
+    color:var(--sage);
+  }
+
+  .hero-visual{
+    position:relative;
+    display:flex;
+    justify-content:center;
+  }
+  .hero-visual svg{width:100%; max-width:420px; height:auto;}
+
+  .knot-path{
+    fill:none;
+    stroke:var(--gold);
+    stroke-width:2.5;
+    stroke-linecap:round;
+    stroke-dasharray:900;
+    stroke-dashoffset:900;
+    animation:draw 2.6s ease forwards 0.4s;
+  }
+  .release-path{
+    fill:none;
+    stroke:var(--clay);
+    stroke-width:2.5;
+    stroke-linecap:round;
+    stroke-dasharray:520;
+    stroke-dashoffset:520;
+    animation:draw 2.2s ease forwards 2.4s;
+  }
+  @keyframes draw{ to{ stroke-dashoffset:0; } }
+
+  @media (prefers-reduced-motion: reduce){
+    .knot-path, .release-path{animation:none; stroke-dashoffset:0;}
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:120px 0;}
+  .section-head{
+    max-width:620px;
+    margin-bottom:64px;
+  }
+  .section-head h2{
+    font-size:clamp(2.1rem, 4vw, 2.9rem);
+    margin-top:14px;
+    line-height:1.08;
+  }
+  .section-head p{
+    margin-top:18px;
+    color:var(--parchment-dim);
+    font-size:1.02rem;
+    max-width:520px;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about{
+    background:var(--parchment);
+    color:var(--ink);
+  }
+  .about .eyebrow{color:var(--clay-deep);}
+  .about h2{color:var(--ink);}
+  .about-grid{
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:60px;
+    align-items:start;
+  }
+  .about-lead{
+    font-family:'Fraunces', serif;
+    font-size:1.5rem;
+    font-weight:450;
+    line-height:1.4;
+    color:var(--ink);
+  }
+  .about-body p{
+    color:#4A463D;
+    margin-bottom:18px;
+    max-width:480px;
+  }
+  .about-stats{
+    display:flex;
+    gap:48px;
+    margin-top:36px;
+    flex-wrap:wrap;
+  }
+  .stat-num{
+    font-family:'Fraunces', serif;
+    font-size:2.4rem;
+    font-weight:600;
+    color:var(--clay-deep);
+  }
+  .stat-label{
+    font-size:0.8rem;
+    color:#75705F;
+    letter-spacing:0.02em;
+  }
+
+  /* ---------- SERVICES ---------- */
+  .services{background:var(--ink);}
+  .service-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .service-card{
+    background:var(--ink);
+    padding:40px 32px;
+    transition:background 0.3s ease;
+  }
+  .service-card:hover{background:var(--ink-soft);}
+  .service-icon{
+    width:44px; height:44px;
+    margin-bottom:22px;
+  }
+  .service-card h3{
+    font-size:1.25rem;
+    margin-bottom:10px;
+    font-weight:600;
+  }
+  .service-card p{
+    color:var(--parchment-dim);
+    font-size:0.94rem;
+  }
+  .service-tag{
+    display:inline-block;
+    margin-top:16px;
+    font-family:'Space Mono', monospace;
+    font-size:0.72rem;
+    color:var(--gold);
+    letter-spacing:0.05em;
+  }
+
+  /* ---------- EXPECT (process) ---------- */
+  .expect{background:var(--parchment);color:var(--ink);}
+  .expect .eyebrow{color:var(--clay-deep);}
+  .expect h2{color:var(--ink);}
+  .timeline{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:40px;
+    margin-top:20px;
+  }
+  .timeline-item{
+    position:relative;
+    padding-top:28px;
+    border-top:2px solid var(--clay);
+  }
+  .timeline-num{
+    font-family:'Space Mono', monospace;
+    font-size:0.78rem;
+    color:var(--clay-deep);
+    letter-spacing:0.05em;
+  }
+  .timeline-item h3{
+    color:var(--ink);
+    font-size:1.3rem;
+    margin:12px 0 10px;
+  }
+  .timeline-item p{color:#4A463D; font-size:0.95rem;}
+
+  /* ---------- BENEFITS ---------- */
+  .benefits{background:var(--ink);}
+  .benefit-list{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .benefit-item{
+    background:var(--ink);
+    padding:28px 32px;
+    display:flex;
+    align-items:center;
+    gap:18px;
+  }
+  .benefit-dot{
+    width:8px; height:8px;
+    border-radius:50%;
+    background:var(--sage);
+    flex-shrink:0;
+  }
+  .benefit-item span{font-size:1.02rem; color:var(--parchment);}
+
+  /* ---------- CONTACT / CTA ---------- */
+  .cta{
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(189,126,104,0.18), transparent 60%),
+      var(--ink);
+    text-align:center;
+    padding:140px 0;
+  }
+  .cta h2{
+    font-size:clamp(2.4rem, 6vw, 3.6rem);
+    max-width:700px;
+    margin:0 auto 24px;
+    line-height:1.1;
+  }
+  .cta p{
+    color:var(--parchment-dim);
+    max-width:460px;
+    margin:0 auto 36px;
+  }
+
+  footer{
+    background:var(--ink-soft);
+    border-top:1px solid var(--line);
+    padding:56px 0 32px;
+  }
+  .footer-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr;
+    gap:40px;
+    margin-bottom:44px;
+  }
+  .footer-brand .logo{margin-bottom:14px;}
+  .footer-brand p{color:var(--parchment-dim); max-width:280px; font-size:0.92rem;}
+  .footer-col h4{
+    font-family:'Space Mono', monospace;
+    font-size:0.75rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--sage);
+    margin-bottom:16px;
+  }
+  .footer-col a, .footer-col p{
+    display:block;
+    color:var(--parchment-dim);
+    font-size:0.92rem;
+    margin-bottom:10px;
+  }
+  .footer-col a:hover{color:var(--clay);}
+  .footer-bottom{
+    display:flex;
+    justify-content:space-between;
+    padding-top:28px;
+    border-top:1px solid var(--line);
+    font-size:0.8rem;
+    color:var(--parchment-dim);
+    flex-wrap:wrap;
+    gap:12px;
+  }
+
+  /* ---------- REVEAL ANIM ---------- */
+  .reveal{
+    opacity:0;
+    transform:translateY(24px);
+    transition:opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:860px){
+    .nav-links{display:none;}
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-visual{order:-1; margin-bottom:20px;}
+    .hero-visual svg{max-width:260px;}
+    .about-grid{grid-template-columns:1fr; gap:32px;}
+    .service-grid{grid-template-columns:1fr;}
+    .timeline{grid-template-columns:1fr; gap:36px;}
+    .benefit-list{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr; gap:28px;}
+    section{padding:80px 0;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="container">
+    <div class="logo">Relieve <span>&</span> Release</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#expect">What to Expect</a>
+      <a href="#benefits">Benefits</a>
+    </div>
+    <a href="#contact" class="nav-cta">Book a Session</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <h1 class="hero-headline">
+        <span class="relieve">Relieve.</span>
+        <span class="release">Release.</span>
+      </h1>
+      <p class="hero-sub">Gentle, mindful bodywork designed to encourage relaxation, body awareness, and a deeper connection with yourself in a respectful, supportive environment. Experience a gentle approach to intimate wellness that promotes relaxation, mindfulness, and emotional well-being through respectful, client-centered care..</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">BOOK A SESSION</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <svg viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg">
+        <path class="knot-path" d="M 60 210 C 60 150, 120 150, 130 190 C 140 230, 90 250, 90 210 C 90 170, 150 160, 160 210 C 170 260, 100 270, 110 210 C 120 150, 190 160, 195 210"/>
+        <path class="release-path" d="M 195 210 C 260 210, 320 210, 380 210"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Services</p>
+      <h2>Bodywork built around your body</h2>
+      <p>Every session can be adjusted in pressure and pace but everything should be in consent and respect .</p>
+    </div>
+  </div>
+  <div class="service-grid">
+    <div class="service-card reveal in"
+     style="background:url('https://i.ibb.co/nNRtBRCY/images.jpg') center center/cover no-repeat;">
+      <svg class="service-icon" viewBox="0 0 44 44" fill="none"><circle cx="22" cy="22" r="20" stroke="#C9A667" stroke-width="1.4"/><path d="M14 22c2-6 6-9 8-9s6 3 8 9-3 9-8 9-10-3-8-9z" stroke="#BD7E68" stroke-width="1.4"/></svg>
+      <h3>Yoni Massage
+      <p>A Tantric practice that involves mindful, therapeutic stimulation of the vulva and vagina (known as "yoni" in Sanskrit, meaning "sacred space"). The goal is to promote relaxation, release emotional tension, enhance orgasmic potential, and heal past sexual trauma through respectful, non-goal-oriented touch.</p>
+      <span class="service-tag">60 / 90 MIN</span>
+    </div>
+
+<section class="expect" id="expect" style="background-color:#def4e4;">
+  <div class="container">
+    <div class="service-card reveal in"
+     style="background:url('https://i.ibb.co/hFdvHBmm/Test1111.webp') center center/cover no-repeat;">
+      <p class="eyebrow" style="color: #0000FF;">First Impression</p>
+      <h4 style="color:#0000FF;"> What to expect</h4>
+      <p>  <p style="color:#36454F; line-height:1.8; max-width:700px;">
+The session combines a full-body relaxation massage with dedicated yoni wellness bodywork, delivered with professionalism, respect, and your informed consent throughout. Communication is important, privacy, and your comfort remaining the highest priority at every stage..</p>
+    </div>
+</section>
+
+<section class="benefits" id="benefits">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Why It Helps</p>
+      <h2>What regular bodywork changes</h2>
+    </div>
+    <div class="benefit-list">
+      <div class="benefit-item reveal"><span class="benefit-dot"></span><span>Promotes Deep Relaxation</span></div>
+      <div class="benefit-item reveal"><span class="benefit-dot"></span><span>Encourages Body Awareness</span></div>
+      <div class="benefit-item reveal"><span class="benefit-dot"></span><span>Reduces Everyday Stress</span></div>
+      <div class="benefit-item reveal"><span class="benefit-dot"></span><span>Supports Emotional Well-Being</span></div>
+      <div class="benefit-item reveal"><span class="benefit-dot"></span><span>Personalized to Your Comfort</span></div>
+      <div class="benefit-item reveal"><span class="benefit-dot"></span><span>Respectful & Professional Care</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="contact">
+  <div class="container">
+    <p class="eyebrow reveal">Ready When You Are</p>
+    <h2 class="reveal">Come in tense. Leave lighter.</h2>
+    <p class="reveal">Sessions are by appointment, Saturday and Sunday. Reach out and we'll find a time that works.</p>
+    <a href="mailto:hello@relieveandrelease.com" class="btn-primary reveal">TG:xlynx01 </a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">Relieve <span style="color:var(--clay);">&</span> Release</div>
+        <p>A temporary escape and emotional release.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Studio</h4>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#expect">What to Expect</a>
+        <a href="#benefits">Benefits</a>
+      </div>
+      <div class="footer-col">
+        <h4>Visit</h4>
+        <p>Tue – Sun, 9am – 7pm</p>
+        <p>Outcall only: motel/hotel/condo service</p>
+        <a href="TG: xlynx01 </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Relieve and Release. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, {threshold:0.15});
+  revealEls.forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
